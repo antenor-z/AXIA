@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ current_path }} {% endblock %}
+
+{% block content %}
+{% include 'modalMkdir.html' %}
+{% include 'modalUpload.html' %}
+
+<toolbar>
+    <a href="" onclick="modalUploadClick(event)">UPLOAD</a>
+    <a href="" onclick="modalMkdirClick(event)">MKDIR</a>
+    <a href="" onclick="toggleRm(event)">RM</a>
+    <a href="/logout"><b>EXIT</b></a>
+</toolbar>
+
+<header>
+    {{ current_path }}
+</header>
+
+<table class="files">
+{% for r in res %}
+    <tr onclick="window.location.href = '{{r['path']}}'">
+        <td>
+            <span class="{{r['type']}}">{{ r['name'] }}</span>
+        </td>
+        <td style="padding-left: 50px; opacity: 0.25">
+            {{ r['created_at'] }}
+        </td>
+        <td class="rm" style="display: none;">
+            {% if r['type'] != 'up' %}
+            <a href="{{r['rm_path']}}">[RM]</a> 
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
+</table>
+
+<script>
+    var elements = document.querySelectorAll('.rm');
+    function toggleRm(event) {
+        event.preventDefault()
+        elements.forEach(function(element) {
+            if (element.style.display === 'none' || element.style.display === '') {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        });
+    }
+  
+</script>
+
+{% endblock %}
+

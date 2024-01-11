@@ -1,0 +1,23 @@
+<div class="modal" id="modalMkdir">
+    <form action="/mkdir" method="post">
+        <input type="text" name="folder_name">
+        <div>
+          <input type="hidden" name="path" value="{{current_path}}">
+          <button type="submit">Create Directory</button>
+          <a href="" onclick="modalMkdirClick(event)">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    var modalMkdir = document.getElementById('modalMkdir');
+    modalMkdir.style.display = 'none';
+    function modalMkdirClick(event) {
+      event.preventDefault()
+      if (modalMkdir.style.display === 'none') {
+        modalMkdir.style.display = 'block';
+      } else {
+        modalMkdir.style.display = 'none';
+      }
+    };
+</script>
