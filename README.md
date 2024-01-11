@@ -2,9 +2,20 @@
 
 Unprofessionally made file server.
 
+## Configuration
+Set the password and secret_key in the `.env` file.
+```
+password="changeme"
+secret_key="changeme"
+```
+
+Install requirements with
+```
+pip install -r requirements.txt`
+```
+
 ## Running
 ```
-pip install -r requirements.txt
 python3 app.py
 ```
 
