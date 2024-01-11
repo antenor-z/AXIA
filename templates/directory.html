@@ -10,7 +10,7 @@
     <a href="" onclick="modalUploadClick(event)">UPLOAD</a>
     <a href="" onclick="modalMkdirClick(event)">MKDIR</a>
     <a href="" onclick="toggleRm(event)">RM</a>
-    <a href="/logout"><b>EXIT</b></a>
+    <a href="/logout">EXIT</a>
 </toolbar>
 
 <header>
@@ -23,7 +23,7 @@
         <td>
             <span class="{{r['type']}}">{{ r['name'] }}</span>
         </td>
-        <td style="padding-left: 50px; opacity: 0.25">
+        <td style="padding-left: 50px; color: rgba(255, 255, 255, 0.25);">
             {{ r['created_at'] }}
         </td>
         <td class="rm" style="display: none;">
