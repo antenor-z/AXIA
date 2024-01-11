@@ -3,10 +3,11 @@
 Unprofessionally made file server.
 
 ## Configuration
-Set the password and secret_key in the `.env` file.
+Set the `.env` file:
 ```
 password="changeme"
 secret_key="changeme"
+max_upload_size_mb="1024"
 ```
 
 Install requirements with

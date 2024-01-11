@@ -20,6 +20,8 @@ limiter = Limiter(
 )
 limiter.limit("4 per minute")(login)
 
+app.config['MAX_CONTENT_LENGTH'] = float(config["max_upload_size_mb"]) * 1024 * 1024 
+
 app.register_blueprint(login)
 app.secret_key = config["secret_key"]
 DIR = "cloud"
