@@ -1,4 +1,6 @@
 from flask import Flask, render_template, send_from_directory, redirect, request
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from werkzeug.utils import secure_filename
 import os
 import shutil
@@ -10,6 +12,14 @@ from dotenv import dotenv_values
 config = dotenv_values(".env")
 
 app = Flask(__name__)
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=[],
+    storage_uri="memory://",
+)
+limiter.limit("4 per minute")(login)
+
 app.register_blueprint(login)
 app.secret_key = config["secret_key"]
 DIR = "cloud"
