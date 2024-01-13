@@ -122,6 +122,8 @@ def mkdir():
     folder_name = request.form["folder_name"]
     path = request.form["path"]
     if path.startswith("/"): path = path[1:]
+    if "/" in folder_name or "$" in folder_name:
+        return "invalid folder name"
     int_path = os.path.join(DIR, path, folder_name)
     os.mkdir(int_path)
     return redirect("/p/" + path)
