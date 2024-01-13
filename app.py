@@ -2,6 +2,7 @@ from flask import Flask, render_template, send_from_directory, redirect, request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from werkzeug.utils import secure_filename
+from werkzeug.middleware.proxy_fix import ProxyFix
 import os
 import shutil
 from datetime import datetime
@@ -12,6 +13,7 @@ from dotenv import dotenv_values
 config = dotenv_values(".env")
 
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1)
 limiter = Limiter(
     get_remote_address,
     app=app,
