@@ -17,7 +17,7 @@
     {{ current_path }}
 </header>
 
-<table class="files">
+<table class="files" ondragenter="handleDragEnter(event)" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
 {% for r in res %}
     <tr onclick="window.location.href = '{{r['path']}}'">
         <td>
@@ -41,13 +41,25 @@
         event.preventDefault()
         elements.forEach(function(element) {
             if (element.style.display === 'none' || element.style.display === '') {
-                element.style.display = 'block';
+                element.style.display = 'block'
             } else {
-                element.style.display = 'none';
+                element.style.display = 'none'
             }
         });
     }
   
+    function handleDragEnter(event) {
+        event.preventDefault()
+        modalUploadClick(event)
+    }
+
+    function handleDragOver(event) {
+        event.preventDefault()
+    }
+
+    function handleDrop(event) {
+        event.preventDefault()
+    }
 </script>
 
 {% endblock %}

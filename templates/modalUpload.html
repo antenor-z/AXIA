@@ -1,7 +1,7 @@
 <div class="modal" id="modalUpload">
   <form action="/upload" method="post" enctype="multipart/form-data">
       <input type="hidden" name="path" value="{{current_path}}">
-      <input type="file" name="file">
+      <input type="file" name="file" multiple>
       <div>
         <button type="submit">Upload File</button>
         <a href="" onclick="modalUploadClick(event)">Cancel</a>

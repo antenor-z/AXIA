@@ -106,14 +106,15 @@ def upload_post():
     if 'file' not in request.files:
         return "no file"
     
-    file = request.files['file']
+    files = request.files.getlist('file')
 
-    if file.filename == '':
-        return "no file"
-        
-    if file:
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(DIR, path, filename))
+    for file in files:
+        if file.filename == '':
+            return "no file", 500
+            
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(DIR, path, filename))
 
     return redirect("/p/" + path)
 
@@ -122,9 +123,7 @@ def mkdir():
     folder_name = request.form["folder_name"]
     path = request.form["path"]
     if path.startswith("/"): path = path[1:]
-    if "/" in folder_name or "$" in folder_name:
-        return "invalid folder name"
-    int_path = os.path.join(DIR, path, folder_name)
+    int_path = os.path.join(DIR, path, secure_filename(folder_name))
     os.mkdir(int_path)
     return redirect("/p/" + path)
 
