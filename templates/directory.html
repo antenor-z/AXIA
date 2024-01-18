@@ -17,7 +17,7 @@
     {{ current_path }}
 </header>
 
-<table class="files" ondragenter="handleDragEnter(event)" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+<table class="files" ondragenter="modalUploadDragFile(event)" ondrop="modalUploadInsertDroppedFiles(event)">
 {% for r in res %}
     <tr onclick="window.location.href = '{{r['path']}}'">
         <td>
@@ -35,32 +35,7 @@
 {% endfor %}
 </table>
 
-<script>
-    var elements = document.querySelectorAll('.rm');
-    function toggleRm(event) {
-        event.preventDefault()
-        elements.forEach(function(element) {
-            if (element.style.display === 'none' || element.style.display === '') {
-                element.style.display = 'block'
-            } else {
-                element.style.display = 'none'
-            }
-        });
-    }
-  
-    function handleDragEnter(event) {
-        event.preventDefault()
-        modalUploadClick(event)
-    }
-
-    function handleDragOver(event) {
-        event.preventDefault()
-    }
-
-    function handleDrop(event) {
-        event.preventDefault()
-    }
-</script>
+<script src="/static/rmButton.js"></script>
 
 {% endblock %}
 
