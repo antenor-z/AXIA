@@ -15,5 +15,6 @@ function modalUploadInsertDroppedFiles(event) {
 }
 
 function modalUploadDragFile(event) {
+    event.preventDefault()
     modalUpload.style.display = 'block';
 }

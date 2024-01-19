@@ -18,8 +18,11 @@ a, a:visited {
     color: var(--text-color);
     text-decoration: none;
 }
+div.dragFileArea {
+    height: 100vh;
+}
 table.files {
-    width: 100vw;
+    width: 100vw;  
     padding-top: 100px;
     border-spacing: 0px;
     tr:hover {

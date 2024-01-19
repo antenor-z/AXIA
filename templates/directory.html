@@ -6,6 +6,7 @@
 {% include 'modalMkdir.html' %}
 {% include 'modalUpload.html' %}
 
+<div class="dragFileArea" ondragenter="modalUploadDragFile(event)" ondrop="modalUploadInsertDroppedFiles(event)" ondragover="event.preventDefault()">
 <toolbar>
     <a href="" onclick="modalUploadClick(event)">UPLOAD</a>
     <a href="" onclick="modalMkdirClick(event)">MKDIR</a>
@@ -17,7 +18,7 @@
     {{ current_path }}
 </header>
 
-<table class="files" ondragenter="modalUploadDragFile(event)" ondrop="modalUploadInsertDroppedFiles(event)">
+<table class="files">
 {% for r in res %}
     <tr onclick="window.location.href = '{{r['path']}}'">
         <td>
@@ -34,6 +35,7 @@
     </tr>
 {% endfor %}
 </table>
+</div>
 
 <script src="/static/rmButton.js"></script>
 
