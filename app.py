@@ -171,9 +171,9 @@ def format_file_size(size):
         return str(size) + " bytes"
     
 def get_directory_size(directory):
-    res = subprocess.run(["du", "-bs", directory], capture_output=True)
-    res = res.stdout.decode("utf-8")
-    if res == "" or "\t" not in res:
+    r = subprocess.run(["du", "-bs", directory], capture_output=True)
+    res = r.stdout.decode("utf-8")
+    if r.returncode != 0:
         return 0
     return int(res.split("\t")[0])
 
