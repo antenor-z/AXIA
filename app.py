@@ -67,11 +67,13 @@ def ls(path = ""):
         ext_path = os.path.join(path, file)
         int_path = os.path.join(DIR, path, file)
         file_or_dir = "/p/" if os.path.isdir(int_path) else "/f/"
+        size = os.path.getsize(int_path)
          
         res.append({
             "name": file,
             "created_at": datetime.fromtimestamp(os.path.getctime(int_path)).strftime('%Y-%m-%d %H:%M'),
             "path": file_or_dir + ext_path,
+            "size": format_file_size(size),
             "type": get_path_type(int_path=int_path),
             "rm_path": "/rm/" + ext_path
         })
@@ -130,6 +132,21 @@ def mkdir():
 # @app.errorhandler(404)
 # def not_found(e):
 #     return render_template("error.html", error="404 | Página não encontrada."), 404
+
+def format_file_size(size):
+    GiB = 1024 * 1024 * 1024
+    MiB = 1024 * 1024
+    KiB = 1024
+    if size >= GiB:
+        return str(round(size / GiB, 2)) + " GiB"
+    elif size >= MiB:
+        return str(round(size / MiB, 2)) + " MiB"
+    elif size >= KiB:
+        return str(round(size / KiB, 2)) + " KiB"
+    elif size == 1:
+        return str(size) + " byte"
+    else:
+        return str(size) + " bytes"
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
