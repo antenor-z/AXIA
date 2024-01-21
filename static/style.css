@@ -111,7 +111,7 @@ button {
 span.folder::before {
     content: '📁';
 }
-span.document::before {
+span.document::before, span.other::before {
     content: '📄';
 }
 span.image::before {
@@ -123,6 +123,28 @@ span.document2::before {
 span.up::before {
     content: '🔼';
 }
+span.video::before {
+    content: '🎥';
+}
+span.spreadsheet::before {
+    content: '📊';
+}
+span.compressed::before {
+    content: '📦';
+}
+span.audio::before {
+    content: '🔊';
+}
+span.web::before {
+    content: '🌐';
+}
+span.data::before {
+    content: '📑';
+}
+span.executable::before {
+    content: '💻';
+}
+
 div.login-form {
     display: flex;
     justify-content: center;

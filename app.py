@@ -1,3 +1,4 @@
+import subprocess
 from flask import Flask, render_template, send_from_directory, redirect, request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -44,8 +45,26 @@ def get_path_type(int_path):
             "jpeg": "image",
             "png": "image",
             "pdf": "document2",
+            "mp4": "video",
+            "mov": "video",
+            "txt": "document",
+            "ppt": "presentation",
+            "pptx": "presentation",
+            "xls": "spreadsheet",
+            "xlsx": "spreadsheet",
+            "zip": "compressed",
+            "rar": "compressed",
+            "mp3": "audio",
+            "wav": "audio",
+            "html": "web",
+            "css": "web",
+            "js": "web",
+            "json": "data",
+            "csv": "data",
+            "exe": "executable",
+            "gif": "image",
         }
-        ttype = ddict.get(extension, "document")
+        ttype = ddict.get(extension, "other")
     return ttype
 
 @app.get("/")
@@ -63,22 +82,25 @@ def ls(path = ""):
                 "type": "up"
             }
         )
-    for file in os.listdir(os.path.join(DIR, path)):
+    for file in sorted(os.listdir(os.path.join(DIR, path)), key=lambda x: (not os.path.isdir(os.path.join(DIR, path, x)), x)):
         ext_path = os.path.join(path, file)
         int_path = os.path.join(DIR, path, file)
         file_or_dir = "/p/" if os.path.isdir(int_path) else "/f/"
-        size = os.path.getsize(int_path)
+        if not os.path.isdir(int_path):
+            size = os.path.getsize(int_path)
+        else:
+            size = get_directory_size(int_path)
+
+        size = format_file_size(size)
          
         res.append({
             "name": file,
             "created_at": datetime.fromtimestamp(os.path.getctime(int_path)).strftime('%Y-%m-%d %H:%M'),
             "path": file_or_dir + ext_path,
-            "size": format_file_size(size),
+            "size": size,
             "type": get_path_type(int_path=int_path),
             "rm_path": "/rm/" + ext_path
         })
-
-        res.sort(key=lambda x: x['name'].split(".")[-1])
 
     return render_template("directory.html", res=res, upload="/upload/" + path, current_path="/" + path)
 
@@ -147,6 +169,14 @@ def format_file_size(size):
         return str(size) + " byte"
     else:
         return str(size) + " bytes"
+    
+def get_directory_size(directory):
+    res = subprocess.run(["du", "-bs", directory], capture_output=True)
+    res = res.stdout.decode("utf-8")
+    if res == "" or "\t" not in res:
+        return 0
+    return int(res.split("\t")[0])
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
