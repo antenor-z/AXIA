@@ -12,7 +12,6 @@
     <a href="" onclick="modalUploadClick(event)">UPLOAD</a>
     <a href="" onclick="modalCreateClick(event)">CREATE</a>
     <a href="" onclick="modalMkdirClick(event)">MKDIR</a>
-    <a href="" onclick="toggleRm(event)">RM</a>
     <a href="/logout">EXIT</a>
 </toolbar>
 
@@ -32,17 +31,25 @@
         <td style="color: rgba(255, 255, 255, 0.25); text-align: right;">
             {{ r['created_at'] }}
         </td>
-        <td class="rm" style="display: none;">
+        <td onclick="toggleMore(event, '{{r['path']}}')">
             {% if r['type'] != 'up' %}
-            <a href="{{r['rm_path']}}">[RM]</a> 
+            ...
             {% endif %}
         </td>
+    </tr>
+    <tr id="more-{{r['path']}}" style="display: none;" class="no-highlight">
+        <td>
+            <a href="{{r['rm_path']}}">[RM]</a> [RENAME] [EDIT]
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
 {% endfor %}
 </table>
 </div>
 
-<script src="/static/rmButton.js"></script>
+<script src="/static/toggleMore.js"></script>
 
 {% endblock %}
 

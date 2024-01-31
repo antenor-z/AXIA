@@ -25,6 +25,10 @@ table.files {
     width: 100vw;  
     padding: 100px 10px 10px 10px;
     border-spacing: 0px;
+    tr.no-highlight:hover {
+        background-color: rgba(255, 255, 255, 0);
+        cursor: default;
+    }
     tr:hover {
         background-color: rgba(255, 255, 255, 0.15);
     }
