@@ -151,6 +151,16 @@ def mkdir():
     os.mkdir(int_path)
     return redirect("/p/" + path)
 
+@app.post("/create/")
+def create():
+    folder_name = request.form["file_name"]
+    path = request.form["path"]
+    if path.startswith("/"): path = path[1:]
+    int_path = os.path.join(DIR, path, secure_filename(folder_name))
+    with open(int_path, "w"):
+        pass
+    return redirect("/p/" + path)
+
 # @app.errorhandler(404)
 # def not_found(e):
 #     return render_template("error.html", error="404 | Página não encontrada."), 404

@@ -48,7 +48,6 @@ toolbar {
     top: 0;
     * {
         padding: 2px 15px;
-	margin: 0 15px;
     }
     *:hover {
         background-color: var(--secondary);

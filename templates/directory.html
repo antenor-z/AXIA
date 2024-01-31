@@ -4,11 +4,13 @@
 
 {% block content %}
 {% include 'modalMkdir.html' %}
+{% include 'modalCreate.html' %}
 {% include 'modalUpload.html' %}
 
 <div class="dragFileArea" ondragenter="modalUploadDragFile(event)" ondrop="modalUploadInsertDroppedFiles(event)" ondragover="event.preventDefault()">
 <toolbar>
     <a href="" onclick="modalUploadClick(event)">UPLOAD</a>
+    <a href="" onclick="modalCreateClick(event)">CREATE</a>
     <a href="" onclick="modalMkdirClick(event)">MKDIR</a>
     <a href="" onclick="toggleRm(event)">RM</a>
     <a href="/logout">EXIT</a>
