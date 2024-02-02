@@ -6,6 +6,7 @@
 {% include 'modalMkdir.html' %}
 {% include 'modalCreate.html' %}
 {% include 'modalUpload.html' %}
+{% include 'modalRename.html' %}
 
 <div class="dragFileArea" ondragenter="modalUploadDragFile(event)" ondrop="modalUploadInsertDroppedFiles(event)" ondragover="event.preventDefault()">
 <toolbar>
@@ -19,31 +20,31 @@
     {{ current_path }}
 </header>
 
-<table class="files">
+<table style="table-layout: fixed;" class="files">
 {% for r in res %}
     <tr onclick="window.location.href = '{{r['path']}}'">
-        <td>
+        <td style="overflow: hidden;">
             <span class="{{r['type']}}">{{ r['name'] }}</span>
         </td>
-        <td style="color: rgba(255, 255, 255, 0.50); text-align: right;">
+        <td style="color: rgba(255, 255, 255, 0.50); width: 10ch;">
             {{ r['size'] }}
         </td>
-        <td style="color: rgba(255, 255, 255, 0.25); text-align: right;">
+        <td style="color: rgba(255, 255, 255, 0.25); width: 16ch;">
             {{ r['created_at'] }}
+            <span id="more-{{r['path']}}" style="display: none;" onclick="event.stopPropagation()">
+                <br>
+                <a href="{{r['rm_path']}}">[RM]</a> 
+                <a href="" onclick="modalRenameClick(event, '{{ r['rename_path'] }}')">[RENAME]</a>
+                {% if r['edit_path'] != none %}
+                <a href="{{ r['edit_path'] }}">[EDIT AS TEXT]</a>
+                {% endif %}
+            </span>
         </td>
-        <td onclick="toggleMore(event, '{{r['path']}}')">
+        <td style="width: 2ch;" onclick="toggleMore(event, '{{r['path']}}')">
             {% if r['type'] != 'up' %}
-            ...
+            <span>➕</span>
             {% endif %}
         </td>
-    </tr>
-    <tr id="more-{{r['path']}}" style="display: none;" class="no-highlight">
-        <td>
-            <a href="{{r['rm_path']}}">[RM]</a> [RENAME] [EDIT]
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
     </tr>
 {% endfor %}
 </table>

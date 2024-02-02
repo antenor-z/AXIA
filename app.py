@@ -92,6 +92,7 @@ def ls(path = ""):
             size = get_directory_size(int_path)
 
         size = format_file_size(size)
+        edit_path : str | None = get_edit_path(ext_path)
          
         res.append({
             "name": file,
@@ -99,7 +100,9 @@ def ls(path = ""):
             "path": file_or_dir + ext_path,
             "size": size,
             "type": get_path_type(int_path=int_path),
-            "rm_path": "/rm/" + ext_path
+            "rm_path": "/rm/" + ext_path,
+            "edit_path": edit_path,
+            "rename_path": "/rename/" + ext_path
         })
 
     return render_template("directory.html", res=res, upload="/upload/" + path, current_path="/" + path)
@@ -161,6 +164,35 @@ def create():
         pass
     return redirect("/p/" + path)
 
+@app.post("/rename/<path:path>")
+def rename(path):
+    parent_path = os.path.split()[0]
+    new_name = request.form["name"]
+    int_path = os.path.join(DIR, path)
+    parent_dir = os.path.split(int_path)[0]
+    int_path_new = os.path.join(parent_dir, new_name)
+    os.rename(int_path, int_path_new)
+    return redirect("/p/" + parent_path)
+
+@app.get("/edit/<path:path>")
+def edit(path):
+    int_path = os.path.join(DIR, path)
+    if not is_plain_text_file(int_path):
+        return "The file is not plain text"
+    a = ""
+    with open(int_path) as fp:
+        a = fp.read()
+    return render_template("edit.html", contents=a, path=path)
+
+@app.post("/edit/<path:path>")
+def update(path):
+    new_contents = request.form["new_contents"]
+    parent_dir = os.path.split(path)[0]
+    with open(os.path.join(DIR, path), "w") as fp:
+        fp.write(new_contents)
+
+    return redirect("/p/" + parent_dir)
+
 # @app.errorhandler(404)
 # def not_found(e):
 #     return render_template("error.html", error="404 | Página não encontrada."), 404
@@ -186,6 +218,20 @@ def get_directory_size(directory):
     if r.returncode != 0:
         return 0
     return int(res.split("\t")[0])
+
+def is_plain_text_file(int_path):
+    try:
+        with open(int_path) as fp:
+            fp.read(128)
+    except IsADirectoryError: return False
+    except UnicodeDecodeError: return False
+    return True
+
+def get_edit_path(ext_path):
+    int_path = os.path.join(DIR, ext_path)
+    if is_plain_text_file(int_path):
+        return f"/edit/{ext_path}"
+    return None
 
 
 if __name__ == '__main__':

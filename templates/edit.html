@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<form method="POST" action="/edit/{{ path }}" style="display: grid; margin: 20px; height: 100%;">
+    <button type="submit">Update file</button>
+    <textarea rows="50" style="background-color: black; color: white; height: 100%;" name="new_contents">{{ contents }}</textarea>
+</form>
+
+
+{% endblock %}
