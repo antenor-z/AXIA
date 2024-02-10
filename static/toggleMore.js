@@ -1,19 +1,18 @@
 function toggleMore(event, filePath) {
-    event.preventDefault()
+    //event.preventDefault()
     event.stopPropagation()
-    element = document.getElementById('more-' + filePath)
-    if (element.style.display === 'none') {
+    const element = document.getElementById('more-' + filePath)
+    const elementPreviousStatus = element.style.display
+    closeAllTooltips()
+    if (elementPreviousStatus === 'none') {
         element.style.display = ''
     } else {
         element.style.display = 'none'
     }
 }
-function toggleMoreNoPrevent(event, filePath) {
-    event.stopPropagation()
-    element = document.getElementById('more-' + filePath)
-    if (element.style.display === 'none') {
-        element.style.display = ''
-    } else {
-        element.style.display = 'none'
-    }
+function closeAllTooltips() {
+    const tooltips = document.querySelectorAll(".tooltip")
+    tooltips.forEach(tooltip => {tooltip.style.display = 'none'} )
 }
+
+document.addEventListener("click", closeAllTooltips);

@@ -31,21 +31,18 @@
         </td>
         <td style="color: rgba(255, 255, 255, 0.25); width: 16ch;">
             {{ r['created_at'] }}
-            <span id="more-{{r['path']}}" style="display: none;" onclick="event.stopPropagation()">
-                <br>
-		<div class="tooltip">
-		    <a onclick="toggleMoreNoPrevent(event, '{{r['path']}}')" href="{{r['rm_path']}}">[RM]</a> 
-		    <a href="" onclick="toggleMore(event, '{{r['path']}}'); modalRenameClick(event, '{{ r['rename_path'] }}')">[RENAME]</a>
-		    {% if r['edit_path'] != none %}
-		    <a onclick="toggleMoreNoPrevent(event, '{{r['path']}}')" href="{{ r['edit_path'] }}">[EDIT AS TEXT]</a>
-		    {% endif %}
-		</div>
-            </span>
         </td>
         <td style="width: 2ch;" onclick="toggleMore(event, '{{r['path']}}')">
             {% if r['type'] != 'up' %}
             <span>⋮</span>
             {% endif %}
+            <div class="tooltip" id="more-{{r['path']}}" style="display: none;" onclick="event.stopPropagation()">
+		    <a onclick="closeAllTooltips()" href="{{r['rm_path']}}">[RM]</a> 
+		    <a href="" onclick="closeAllTooltips(); modalRenameClick(event, '{{ r['rename_path'] }}')">[RENAME]</a>
+		    {% if r['edit_path'] != none %}
+		    <a onclick="closeAllTooltips()" href="{{ r['edit_path'] }}">[EDIT AS TEXT]</a>
+		    {% endif %}
+            </div>
         </td>
     </tr>
 {% endfor %}
