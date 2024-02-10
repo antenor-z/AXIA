@@ -160,9 +160,11 @@ div.login-form {
 	position: fixed; 
 	display: grid; 
 	background-color: var(--primary); 
-	opacity: 0.75; 
 	padding: 10px; 
 	border-radius: 5px;
+    	@media (max-width: 800px) {
+		transform: translate(0, 40px);
+	}
 }
 .tooltip a:hover {
     background-color: var(--secondary);
