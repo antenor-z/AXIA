@@ -34,10 +34,10 @@
             <span id="more-{{r['path']}}" style="display: none;" onclick="event.stopPropagation()">
                 <br>
 		<div class="tooltip">
-		    <a href="{{r['rm_path']}}">[RM]</a> 
-		    <a href="" onclick="modalRenameClick(event, '{{ r['rename_path'] }}')">[RENAME]</a>
+		    <a onclick="toggleMoreNoPrevent(event, '{{r['path']}}')" href="{{r['rm_path']}}">[RM]</a> 
+		    <a href="" onclick="toggleMore(event, '{{r['path']}}'); modalRenameClick(event, '{{ r['rename_path'] }}')">[RENAME]</a>
 		    {% if r['edit_path'] != none %}
-		    <a href="{{ r['edit_path'] }}">[EDIT AS TEXT]</a>
+		    <a onclick="toggleMoreNoPrevent(event, '{{r['path']}}')" href="{{ r['edit_path'] }}">[EDIT AS TEXT]</a>
 		    {% endif %}
 		</div>
             </span>
