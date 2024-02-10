@@ -155,3 +155,15 @@ div.login-form {
     height: 100vh;
     margin: 0;
 }
+
+.tooltip {
+	position: fixed; 
+	display: grid; 
+	background-color: var(--primary); 
+	opacity: 0.75; 
+	padding: 10px; 
+	border-radius: 5px;
+}
+.tooltip a:hover {
+    background-color: var(--secondary);
+}

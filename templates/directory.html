@@ -33,16 +33,18 @@
             {{ r['created_at'] }}
             <span id="more-{{r['path']}}" style="display: none;" onclick="event.stopPropagation()">
                 <br>
-                <a href="{{r['rm_path']}}">[RM]</a> 
-                <a href="" onclick="modalRenameClick(event, '{{ r['rename_path'] }}')">[RENAME]</a>
-                {% if r['edit_path'] != none %}
-                <a href="{{ r['edit_path'] }}">[EDIT AS TEXT]</a>
-                {% endif %}
+		<div class="tooltip">
+		    <a href="{{r['rm_path']}}">[RM]</a> 
+		    <a href="" onclick="modalRenameClick(event, '{{ r['rename_path'] }}')">[RENAME]</a>
+		    {% if r['edit_path'] != none %}
+		    <a href="{{ r['edit_path'] }}">[EDIT AS TEXT]</a>
+		    {% endif %}
+		</div>
             </span>
         </td>
         <td style="width: 2ch;" onclick="toggleMore(event, '{{r['path']}}')">
             {% if r['type'] != 'up' %}
-            <span>➕</span>
+            <span>⋮</span>
             {% endif %}
         </td>
     </tr>
