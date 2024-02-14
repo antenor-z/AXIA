@@ -37,10 +37,10 @@
             <span>⋮</span>
             {% endif %}
             <div class="tooltip" id="more-{{r['path']}}" onclick="event.stopPropagation()">
-                <a onclick="closeAllTooltips()" href="{{r['rm_path']}}">Delete</a> 
-                <a href="" onclick="closeAllTooltips(); modalRenameClick(event, '{{ r['rename_path'] }}')">Rename</a>
+                <a onclick="closeAllContextMenus()" href="{{r['rm_path']}}">Delete</a> 
+                <a href="" onclick="closeAllContextMenus(); modalRenameClick(event, '{{ r['rename_path'] }}')">Rename</a>
                 {% if r['edit_path'] != none %}
-                <a onclick="closeAllTooltips()" href="{{ r['edit_path'] }}">Edit as Text</a>
+                <a onclick="closeAllContextMenus()" href="{{ r['edit_path'] }}">Edit as Text</a>
 		    {% endif %}
             </div>
         </td>
