@@ -157,11 +157,11 @@ div.login-form {
 }
 
 .tooltip {
-	position: fixed; 
-	display: grid; 
+    position: absolute; 
+    display: none;
 	min-width: 220px;
 	background-color: var(--primary); 
-	padding: 10px; 
+	padding: 8px; 
 	border-radius: 5px;
     	@media (max-width: 800px) {
 		transform: translate(0, 10px);
@@ -169,6 +169,9 @@ div.login-form {
     	@media (min-width: 801px) {
 		transform: translate(-250px, 0);
 	}
+    * {
+        padding: 0 5px;
+    }
 }
 .tooltip a:hover {
     background-color: var(--secondary);

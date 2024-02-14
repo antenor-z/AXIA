@@ -22,7 +22,7 @@
 
 <table style="table-layout: fixed;" class="files">
 {% for r in res %}
-    <tr onclick="window.location.href = '{{r['path']}}'">
+    <tr onclick="window.location.href = '{{r['path']}}'" oncontextmenu="showContextMenu(event, '{{r['path']}}')">
         <td style="overflow: hidden;">
             <span class="{{r['type']}}">{{ r['name'] }}</span>
         </td>
@@ -32,15 +32,15 @@
         <td style="color: rgba(255, 255, 255, 0.25); width: 16ch;">
             {{ r['created_at'] }}
         </td>
-        <td style="width: 2ch;" onclick="toggleMore(event, '{{r['path']}}')">
+        <td style="width: 2ch;" onclick="showContextMenu(event, '{{r['path']}}')">
             {% if r['type'] != 'up' %}
             <span>⋮</span>
             {% endif %}
-            <div class="tooltip" id="more-{{r['path']}}" style="display: none;" onclick="event.stopPropagation()">
-		    <a onclick="closeAllTooltips()" href="{{r['rm_path']}}">[RM]</a> 
-		    <a href="" onclick="closeAllTooltips(); modalRenameClick(event, '{{ r['rename_path'] }}')">[RENAME]</a>
-		    {% if r['edit_path'] != none %}
-		    <a onclick="closeAllTooltips()" href="{{ r['edit_path'] }}">[EDIT AS TEXT]</a>
+            <div class="tooltip" id="more-{{r['path']}}" onclick="event.stopPropagation()">
+                <a onclick="closeAllTooltips()" href="{{r['rm_path']}}">Delete</a> 
+                <a href="" onclick="closeAllTooltips(); modalRenameClick(event, '{{ r['rename_path'] }}')">Rename</a>
+                {% if r['edit_path'] != none %}
+                <a onclick="closeAllTooltips()" href="{{ r['edit_path'] }}">Edit as Text</a>
 		    {% endif %}
             </div>
         </td>
@@ -49,7 +49,7 @@
 </table>
 </div>
 
-<script src="/static/toggleMore.js"></script>
+<script src="/static/contextMenu.js"></script>
 
 {% endblock %}
 
