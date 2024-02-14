@@ -72,9 +72,16 @@ div.modal {
     display: none;
     background-color: var(--primary);
     border: var(--primary-darker) 3px solid;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    @media (min-width: 801px) {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    @media (max-width: 800px) {
+        width: 90%;
+        top: 10%;
+    }
+
     padding: 20px;
     input {
         font-size: 2rem;
@@ -163,10 +170,10 @@ div.login-form {
 	background-color: var(--primary); 
 	padding: 8px; 
 	border-radius: 5px;
-    	@media (max-width: 800px) {
+    @media (max-width: 800px) {
 		transform: translate(0, 10px);
 	}
-    	@media (min-width: 801px) {
+    @media (min-width: 801px) {
 		transform: translate(-250px, 0);
 	}
     * {
