@@ -22,7 +22,7 @@
 
 <table style="table-layout: fixed;" class="files">
 {% for r in res %}
-    <tr onclick="window.location.href = '{{r['path']}}'" oncontextmenu="showContextMenu(event, '{{r['path']}}')">
+    <tr id="tr-{{r['path']}}" onclick="window.location.href = '{{r['path']}}'" oncontextmenu="showContextMenu(event, '{{r['path']}}')">
         <td style="overflow: hidden;">
             <span class="{{r['type']}}">{{ r['name'] }}</span>
         </td>
@@ -36,7 +36,7 @@
             {% if r['type'] != 'up' %}
             <span>⋮</span>
             {% endif %}
-            <div class="tooltip" id="more-{{r['path']}}" onclick="event.stopPropagation()">
+            <div class="tooltip" id="content-menu-{{r['path']}}" onclick="event.stopPropagation()">
                 <a onclick="closeAllContextMenus()" href="{{r['rm_path']}}">Delete</a> 
                 <a href="" onclick="closeAllContextMenus(); modalRenameClick(event, '{{ r['rename_path'] }}')">Rename</a>
                 {% if r['edit_path'] != none %}
