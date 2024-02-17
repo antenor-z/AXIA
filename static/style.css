@@ -170,7 +170,7 @@ div.login-form {
 	background-color: var(--primary); 
 	padding: 8px; 
 	border-radius: 5px;
-    box-shadow: 10px 10px 20px var(--background-color);
+    box-shadow: 10px 10px 20px;
     @media (max-width: 800px) {
 		transform: translate(0, 10px);
 	}
