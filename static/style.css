@@ -164,7 +164,7 @@ div.login-form {
 }
 
 .tooltip {
-    position: absolute; 
+    position: fixed; 
     display: none;
 	min-width: 220px;
 	background-color: var(--primary); 

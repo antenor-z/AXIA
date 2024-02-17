@@ -28,4 +28,6 @@ function showContextMenu(event, filePath) {
     line.classList.add('hold-select-color')
 }
 
-document.addEventListener("click", closeAllContextMenus);
+document.addEventListener("click", closeAllContextMenus)
+document.addEventListener("scroll", closeAllContextMenus)
+
