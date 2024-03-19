@@ -166,7 +166,7 @@ def create():
 
 @app.post("/rename/<path:path>")
 def rename(path):
-    parent_path = os.path.split()[0]
+    parent_path = os.path.split(path)[0]
     new_name = request.form["name"]
     int_path = os.path.join(DIR, path)
     parent_dir = os.path.split(int_path)[0]
