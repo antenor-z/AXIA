@@ -68,8 +68,8 @@ def get_path_type(int_path):
     return ttype
 
 @app.get("/")
-@app.get("/p/")
-@app.get("/p/<path:path>/")
+@app.get("/p")
+@app.get("/p/<path:path>")
 def ls(path = ""):
     res = []
     if path != "":
@@ -82,6 +82,8 @@ def ls(path = ""):
                 "type": "up"
             }
         )
+        if res[0]["path"].endswith("/"):
+            res[0]["path"] = res[0]["path"][:-1]
     for file in sorted(os.listdir(os.path.join(DIR, path)), key=lambda x: (not os.path.isdir(os.path.join(DIR, path, x)), x)):
         ext_path = os.path.join(path, file)
         int_path = os.path.join(DIR, path, file)
@@ -145,7 +147,7 @@ def upload_post():
 
     return redirect("/p/" + path)
 
-@app.post("/mkdir/")
+@app.post("/mkdir")
 def mkdir():
     folder_name = request.form["folder_name"]
     path = request.form["path"]
@@ -154,7 +156,7 @@ def mkdir():
     os.mkdir(int_path)
     return redirect("/p/" + path)
 
-@app.post("/create/")
+@app.post("/create")
 def create():
     folder_name = request.form["file_name"]
     path = request.form["path"]
