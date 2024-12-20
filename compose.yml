@@ -1,7 +1,7 @@
 services:
   axia:
     restart: unless-stopped
-    build: ../axia
+    build: .
     volumes:
       - ./cloud:/app/cloud
     networks:
